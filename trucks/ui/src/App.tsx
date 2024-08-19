@@ -6,14 +6,14 @@ import logo from "./logo.svg"
 
 const App = () => {
   return (
-    <div className="App">
+    
+    <div className="App h100">
       <div>
         <Header />
       </div>
-      <div>
+      <div className="mapcontainer h100">
         <TruckMap />  
       </div>
-      
     </div>
   )
 }

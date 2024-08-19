@@ -6,16 +6,68 @@
 }
 
 .information {
-    background-color: #e37c7c;
-    margin: 25px 20px 25px 20px;
-    flex: 1;
+    display: flex;
+
+    input {
+        flex: 1
+    }
 }
 
 .flex {
     display: flex;
 }
 
+.flex1 {
+    flex: 1;
+}
+
+.gap10 {
+    gap: 10px;
+}
+
+.flexcolumn {
+    flex-direction: column;
+}
+
+.flexcenter {
+    justify-content: center;
+}
+
+.title {
+    font-size: 34px;
+    text-align: center;
+    color: #333333;
+    font-family: Palatinos;
+    letter-spacing: 2px;
+}
+
 .logo {
     max-width: 100%;
     max-height: 100%;
+}
+
+.inputWithIcon {
+    padding-left: 27px;
+}
+
+.searchIcon {
+    position: relative;
+    top: 5px;
+    left: 4px;
+    font-size: 22px;
+}
+
+.searchInput {
+    height: 26px;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+@media only screen and (max-width: 768px) {
+    .title {
+        font-size: 30px;
+    }
+    .logo {
+        display: none;
+    }
 }

@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from '@react-google-maps/api';
 import { useGetFoodTrucksQuery } from './truckmapApiSlice'
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectedTruck, setSelectedTruck, fetchUserLocation, userLocation } from './truckmapSlice'
+import { selectedTruck, setSelectedTruck, fetchUserLocation, userLocation, LatLngBounds } from './truckmapSlice'
 import { getFoodItemsFilter } from '../header/headerSlice'
+import styles from "./Truckmap.module.css"
 
 export const TruckMap = () => {
     const apiKEY = 'AIzaSyDRdruvB-mVDVc0Hbt59CQhlLCk-h5TItw'
@@ -13,24 +14,47 @@ export const TruckMap = () => {
     const usrLocation = useAppSelector(userLocation)
     const foodItemfilter = useAppSelector(getFoodItemsFilter)
 
-    const { data, error, isLoading } = useGetFoodTrucksQuery(foodItemfilter);
+    const [bounds, setBounds] = useState<LatLngBounds | null>(null);
+
+    const { data, error, isLoading } = useGetFoodTrucksQuery({ foodItemfilter, bounds });
 
     // if (isLoading) return <div>Loading...</div>;
     // if (error) return <div>Error loading food trucks</div>;
 
     const mapStyles = {
-        height: '100vh',
+        height: '97%',
         width: '100%',
     };
     
+    const mapRef = useRef<google.maps.Map | null>(null);
+
+    const handleBoundsChanged = () => {
+        if (mapRef.current) {
+            const bounds = mapRef.current.getBounds();
+            if (bounds) {
+                const ne = bounds.getNorthEast();
+                const sw = bounds.getSouthWest();
+                setBounds({
+                    northEast: { lat: ne.lat(), lng: ne.lng() },
+                    southWest: { lat: sw.lat(), lng: sw.lng() }
+                });
+            }
+        }
+    };
+
     useEffect(() => {
         dispatch(fetchUserLocation())  
     }, [dispatch]);
       
     return (
-        <div style={{margin: '10px'}}>
+        <div className="h100">
             <LoadScript googleMapsApiKey={apiKEY}>
-            <GoogleMap mapContainerStyle={mapStyles} zoom={12} center={usrLocation ? usrLocation : { lat: 37.7749, lng: -122.4194 }} >
+            <GoogleMap 
+                mapContainerStyle={mapStyles} 
+                zoom={12} 
+                center={usrLocation ? usrLocation : { lat: 37.7749, lng: -122.4194 }} 
+                onIdle={() => handleBoundsChanged()}
+                onLoad={(map: google.maps.Map) => mapRef.current = map} >
                 {data?.map((truck) => (
                     <MarkerF 
                     key={truck.locationid}
@@ -46,7 +70,7 @@ export const TruckMap = () => {
                             >
                             <div>
                                 <h3>{currentTruck.applicant}</h3>
-                                <header style={{ borderBottom: '1px solid #ccc', paddingBottom: '5px', marginBottom: '5px' }}>
+                                <header className={styles.infocardHeader}>
                                 </header>
                                 <p><b>Address:</b> {currentTruck.address}</p>
                                 <p><b>Location details:</b> {currentTruck.location_description}</p> 
@@ -62,7 +86,7 @@ export const TruckMap = () => {
                     <MarkerF
                     position={usrLocation}
                     icon={{
-                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Custom icon for the user location
+                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                     }}
                     title="You are here"
                     />
