@@ -79,7 +79,7 @@ foodtruck/
    ```
 
    The backend server will run at `http://localhost:8000/`.
-
+*If you decide to run the server on another port please go to **ui/vite.config.ts** and modify **"/api"** proxy port*
 ### Frontend Setup (React)
 
 1. **Navigate to the frontend directory:**
