@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from '@react-google-maps/api';
 import { useGetFoodTrucksQuery } from './truckmapApiSlice'
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectedTruck, setSelectedTruck, fetchUserLocation, userLocation, LatLngBounds } from './truckmapSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectedTruck, setSelectedTruck, fetchUserLocation, userLocation } from './truckmapSlice'
 import { getFoodItemsFilter } from '../header/headerSlice'
-import styles from "./Truckmap.module.css"
+import styles from './Truckmap.module.css'
+import { LatLngBounds } from './interfaces'
 
 export const TruckMap = () => {
-    const apiKEY = 'AIzaSyDRdruvB-mVDVc0Hbt59CQhlLCk-h5TItw'
+    const apiKEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY 
 
     const dispatch = useAppDispatch()
     const currentTruck = useAppSelector(selectedTruck)
@@ -18,14 +19,6 @@ export const TruckMap = () => {
 
     const { data, error, isLoading } = useGetFoodTrucksQuery({ foodItemfilter, bounds });
 
-    // if (isLoading) return <div>Loading...</div>;
-    // if (error) return <div>Error loading food trucks</div>;
-
-    const mapStyles = {
-        height: '97%',
-        width: '100%',
-    };
-    
     const mapRef = useRef<google.maps.Map | null>(null);
 
     const handleBoundsChanged = () => {
@@ -50,11 +43,14 @@ export const TruckMap = () => {
         <div className="h100">
             <LoadScript googleMapsApiKey={apiKEY}>
             <GoogleMap 
-                mapContainerStyle={mapStyles} 
+                mapContainerStyle={{
+                    height: '97%',
+                    width: '100%',
+                }} 
                 zoom={12} 
                 center={usrLocation ? usrLocation : { lat: 37.7749, lng: -122.4194 }} 
                 onIdle={() => handleBoundsChanged()}
-                onLoad={(map: google.maps.Map) => mapRef.current = map} >
+                onLoad={(map: google.maps.Map) => { mapRef.current = map }} >
                 {data?.map((truck) => (
                     <MarkerF 
                     key={truck.locationid}

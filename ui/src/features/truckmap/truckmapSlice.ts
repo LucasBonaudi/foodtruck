@@ -1,13 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk  } from '@reduxjs/toolkit';
-import { TrucksApiResponse } from './truckmapApiSlice';
+import { TrucksApiResponse, TrucksState } from './interfaces'
 
-
-interface TrucksState {
-    selectedTruck: TrucksApiResponse | null;
-    userLocation: any,
-    locationError: any,
-  }
-  
 const initialState: TrucksState = {
     selectedTruck: null,
     userLocation: null,
@@ -42,7 +35,6 @@ export const truckSlice = createSlice({
     initialState,
     reducers: {
       setSelectedTruck: (state, action: PayloadAction<TrucksApiResponse | null>) => {
-        console.log("action")
         state.selectedTruck = action.payload;
       },
     },
