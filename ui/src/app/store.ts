@@ -1,14 +1,12 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { counterSlice } from "../features/counter/counterSlice"
-import { quotesApiSlice } from "../features/quotes/quotesApiSlice"
 import { truckmapApiSlice } from "../features/truckmap/truckmapApiSlice"
 import { truckSlice } from "../features/truckmap/truckmapSlice"
 import { headerSlice } from "../features/header/headerSlice"
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, truckmapApiSlice, truckSlice, headerSlice)
+const rootReducer = combineSlices(truckmapApiSlice, truckSlice, headerSlice)
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>
 
@@ -21,7 +19,6 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     // and other useful features of `rtk-query`.
     middleware: getDefaultMiddleware => {
       return getDefaultMiddleware().concat(
-        quotesApiSlice.middleware, 
         truckmapApiSlice.middleware
       )
     },

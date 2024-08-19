@@ -24,14 +24,12 @@ describe<LocalTestContext>("counter reducer", it => {
 
   it("should handle initial state", () => {
     expect(headerSlice.reducer(undefined, { type: "unknown" })).toStrictEqual({
-        selectedTruck: null,
-        userLocation: null,
-        locationError: null
+      foodItemsFilter: ""
     })
   })
 
   it("should handle set filters", ({ store }) => {
-    expect(getFoodItemsFilter(store.getState())).toBe(initialState)
+    expect(getFoodItemsFilter(store.getState())).toBe('')
 
     const newFilter = "chicken"
 
