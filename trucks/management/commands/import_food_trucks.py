@@ -41,7 +41,8 @@ class Command(BaseCommand):
                     permit=item.get('permit'),
                     status=item.get('status'),
                     latitude=item.get('latitude'),
-                    longitude=item.get('longitude')
+                    longitude=item.get('longitude'),
+                    foodItems=item.get('fooditems')
                 )
             self.stdout.write(self.style.SUCCESS('Successfully imported food trucks data'))
         except Exception as db_err:
