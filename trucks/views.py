@@ -10,12 +10,22 @@ class FoodTruckListAPI(generics.ListAPIView):
     serializer_class = FoodTruckSerializer
     
     def get_queryset(self):
-        queryset = FoodTruck.objects.all()
-        fooditem = self.request.GET.get('fooditem', None)
+        queryset = super().get_queryset()
+        food_items_filter = self.request.query_params.get('fooditem', None)
+        ne_lat = self.request.query_params.get('ne_lat', None)
+        ne_lng = self.request.query_params.get('ne_lng', None)
+        sw_lat = self.request.query_params.get('sw_lat', None)
+        sw_lng = self.request.query_params.get('sw_lng', None)
 
-        print(fooditem)
+        if food_items_filter:
+            queryset = queryset.filter(foodItems__icontains=food_items_filter)
         
-        if fooditem:
-            queryset = queryset.filter(foodItems__icontains=fooditem)
-        
+        if ne_lat and ne_lng and sw_lat and sw_lng:
+            queryset = queryset.filter(
+                latitude__lte=ne_lat,
+                latitude__gte=sw_lat,
+                longitude__lte=ne_lng,
+                longitude__gte=sw_lng,
+            )
+
         return queryset
