@@ -7,6 +7,7 @@ export interface TrucksApiResponse {
   applicant: string;
   address: string;
   location_description: string;
+  foodItems: string;
 }
 
 export const truckmapApiSlice = createApi({

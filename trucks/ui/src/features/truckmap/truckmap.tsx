@@ -48,12 +48,13 @@ export const TruckMap = () => {
                                 <h3>{currentTruck.applicant}</h3>
                                 <header style={{ borderBottom: '1px solid #ccc', paddingBottom: '10px', marginBottom: '10px' }}>
                                 </header>
-                                <p>Address: {currentTruck.address}</p>
-                                <p>Location details: {currentTruck.location_description}</p>
+                                <p><b>Address:</b> {currentTruck.address}</p>
+                                <p><b>Location details:</b> {currentTruck.location_description}</p> 
+                                <p><b>Food Items:</b> {currentTruck.foodItems.replaceAll(":", ",")}</p>
                             </div>
                         </InfoWindowF>
                     )}
-                    
+
                     </MarkerF>
                 ))} 
                 
