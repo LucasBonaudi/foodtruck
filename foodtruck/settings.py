@@ -53,9 +53,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5174", 
-]
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = [
+        "https://your-production-domain.com",
+    ]
 
 CORS_ALLOW_METHODS = [
     "GET",
