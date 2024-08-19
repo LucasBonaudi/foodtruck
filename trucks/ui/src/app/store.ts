@@ -5,9 +5,10 @@ import { counterSlice } from "../features/counter/counterSlice"
 import { quotesApiSlice } from "../features/quotes/quotesApiSlice"
 import { truckmapApiSlice } from "../features/truckmap/truckmapApiSlice"
 import { truckSlice } from "../features/truckmap/truckmapSlice"
+import { headerSlice } from "../features/header/headerSlice"
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, truckmapApiSlice, truckSlice)
+const rootReducer = combineSlices(counterSlice, quotesApiSlice, truckmapApiSlice, truckSlice, headerSlice)
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>
 

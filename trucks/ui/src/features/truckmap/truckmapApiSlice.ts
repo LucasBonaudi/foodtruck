@@ -14,8 +14,8 @@ export const truckmapApiSlice = createApi({
   reducerPath: 'truckmapApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/' }),
   endpoints: (builder) => ({
-    getFoodTrucks: builder.query<TrucksApiResponse[], void>({
-      query: () => 'trucks/api/foodtrucks/',
+    getFoodTrucks: builder.query<TrucksApiResponse[], string>({
+      query: (foodItem) => `trucks/api/foodtrucks?fooditem=${foodItem}`,
     }),
   }),
 });

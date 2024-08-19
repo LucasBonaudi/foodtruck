@@ -20,7 +20,8 @@
     "google-map-react": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^9.1.0"
+    "react-redux": "^9.1.0",
+    "use-debounce": "^10.0.3"
   },
   "devDependencies": {
     "@testing-library/dom": "^9.3.4",
