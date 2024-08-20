@@ -1,0 +1,23 @@
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: food-truck-server
+    volumes:
+      - ./server:/app
+    ports:
+      - "8000:8000"
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: food-truck-ui
+    ports:
+      - "5173:5173"
+    environment:
+      - BROWSER=noneenvironment
+      - VITE_API_BASE_URL=http://server:8000/
+    depends_on:
+      - server

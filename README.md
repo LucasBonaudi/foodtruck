@@ -38,7 +38,16 @@ foodtruck/
 - Filter food trucks based on location and food items.
 - Unit tests for Redux Toolkit slices and components. (todo)
 
-## Setup Instructions
+## Try it with Docker
+#### Remove existing containers and images with:
+- ``docker compose down -v --rmi all``
+#### Start:
+- ``docker compose up``
+#### Open in browser:
+	Go to [http://localhost:5173/](http://localhost:5173/)
+
+
+## Local Debugging Setup Instructions
 
 ### Prerequisites
 
