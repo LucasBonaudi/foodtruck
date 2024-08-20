@@ -44,7 +44,7 @@ foodtruck/
 #### Start:
 - ``docker compose up``
 #### Open in browser:
-Go to [http://localhost:5173/](http://localhost:5173/)
+- Go to [http://localhost:5173/](http://localhost:5173/)
 
 
 ## Local Debugging Setup Instructions
