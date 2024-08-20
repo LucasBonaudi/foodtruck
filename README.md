@@ -138,22 +138,22 @@ GET /trucks/api/foodtrucks?fooditem=Tacos&ne_lat=37.7749&ne_lng=-122.4194&sw_lat
 ```json
 [
 	{
-		locationid: 1723891,
-		applicant: "Brazuca Grill",
-		location_description: "ARMSTRONG AVE: HAWES ST to INGALLS ST (1300 - 1399)",
-		address: "1315 ARMSTRONG AVE",
-		latitude: 37.723078757516,
-		longitude: -122.38752570401662,
-		foodItems: "Cold Truck: Sandwiches: Noodles:  Pre-packaged Snacks: Candy: Desserts Various Beverages"
+		"locationid": 1723891,
+		"applicant": "Brazuca Grill",
+		"location_description": "ARMSTRONG AVE: HAWES ST to INGALLS ST (1300 - 1399)",
+		"address": "1315 ARMSTRONG AVE",
+		"latitude": 37.723078757516,
+		"longitude": -122.38752570401662,
+		"foodItems": "Cold Truck: Sandwiches: Noodles:  Pre-packaged Snacks: Candy: Desserts Various Beverages"
 	},
 	{
-		locationid: 364218,
-		latitude: 37.78788969990609,
-		longitude: -122.40053532677749,
-		foodItems: "Hot Indian Chai (Tea)",
-		applicant: "The Chai Cart",
-		address: "79 NEW MONTGOMERY ST",
-		location_description: "NEW MONTGOMERY ST: AMBROSE BIERCE ST to MISSION ST (77 - 99)"
+		"locationid": 364218,
+		"latitude": 37.78788969990609,
+		"longitude": -122.40053532677749,
+		"foodItems": "Hot Indian Chai (Tea)",
+		"applicant": "The Chai Cart",
+		"address": "79 NEW MONTGOMERY ST",
+		"location_description": "NEW MONTGOMERY ST: AMBROSE BIERCE ST to MISSION ST (77 - 99)"
 	}
 ]
 ```
