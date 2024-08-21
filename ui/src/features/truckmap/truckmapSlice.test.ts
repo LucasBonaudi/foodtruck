@@ -23,7 +23,7 @@ const initialTruck = {
     location_description: "NEW MONTGOMERY ST: AMBROSE BIERCE ST to MISSION ST (77 - 99)"
 }
 
-describe<LocalTestContext>("counter reducer", it => {
+describe<LocalTestContext>("truckmap reducer", it => {
   beforeEach<LocalTestContext>(context => {
     const initialState: TrucksState = {
         selectedTruck: initialTruck,
